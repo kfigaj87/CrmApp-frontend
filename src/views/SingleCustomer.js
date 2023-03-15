@@ -3,6 +3,7 @@ import { Button, Card, Table } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AddEvent from "../components/AddEvent";
+import config from "../config";
 
 const SingleCustomer = () => {
   const { id } = useParams();
@@ -20,20 +21,20 @@ const SingleCustomer = () => {
   const [isAddActionModalVisible, setIsAddActionModalVisible] = useState(false);
 
   useEffect(() => {
-    axios.get(`customer/${id}`).then((res) => {
-      console.log(id);
+    axios.get(`${config.api.url}/customer/${id}`).then((res) => {
+      console.log(res);
       setCustomer(res.data);
     });
   }, [id, isAddActionModalVisible]);
 
   const deleteCustomerEvent = (customerEventId) => {
     axios
-      .delete(`/customerEvent/delete/${id}`, {
+      .delete(`${config.api.url}/customerEvent/delete/${id}`, {
         data: { customerEventId: customerEventId },
       })
       .then((res) => {
         console.log(res.data);
-        axios.get(`customer/${id}`).then((res) => {
+        axios.get(`${config.api.url}/customer/${id}`).then((res) => {
           console.log(id);
           setCustomer(res.data);
         });
@@ -92,7 +93,7 @@ const SingleCustomer = () => {
       <AddEvent
         isAddActionModalVisible={isAddActionModalVisible}
         setIsAddActionModalVisible={setIsAddActionModalVisible}
-        customerId={customer.id}
+        customerId={customer._id}
       />
     </div>
   );

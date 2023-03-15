@@ -9,14 +9,14 @@ const AppRoutes = (props) => {
   return (
     <Routes>
       <Route
-        path="/crm/"
+        path="/"
         element={<Login user={props.user} setUser={props.setUser} />}
       />
 
       <Route path="/crm/customers" element={<Home />} />
 
       <Route path="/crm/addCustomer" element={<AddCustomer />} />
-      <Route path="/crm/singleCustomer/:id" element={<SingleCustomer />} />
+      <Route path="/crm/customer/:id" element={<SingleCustomer />} />
     </Routes>
   );
 };

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import config from "../config";
 
 const AddEvent = (props) => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,10 @@ const AddEvent = (props) => {
     e.preventDefault();
 
     axios
-      .post(`/customerEvent/add/${props.customerId}`, formData)
+      .post(
+        `${config.api.url}/customerEvent/add/${props.customerId}/events`,
+        formData
+      )
       .then((res) => {
         if (!res.data.error) {
           props.setIsAddActionModalVisible(false);
